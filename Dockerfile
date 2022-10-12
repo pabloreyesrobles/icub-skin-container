@@ -29,12 +29,6 @@ RUN apt-get update && \
 RUN apt install -y python3 python3-dev python3-pip python3-setuptools && \
     if [ ! -f "/usr/bin/python" ]; then ln -s /usr/bin/python3 /usr/bin/python; fi
 
-# RUN useradd -ms /bin/bash ${user} -g ${gid} -G sudo -u ${uid}
-# USER ${user}
-# WORKDIR /home/${user}
-# RUN mkdir /home/icub
-# WORKDIR /home/icub
-
 # Select options
 ARG ROBOTOLOGY_SUPERBUILD_RELEASE=v2022.09.0
 ARG BUILD_TYPE=Release
@@ -69,12 +63,6 @@ RUN cd robotology-superbuild && \
 RUN git config --global --unset-all user.name && \
     git config --global --unset-all user.email
 
-# YARP
-# RUN sh -c 'echo "deb http://www.icub.org/ubuntu focal contrib/science" > /etc/apt/sources.list.d/icub.list' && \
-#     sh -c 'echo "deb http://www.icub.org/debian buster contrib/science" > /etc/apt/sources.list.d/icub.list' && \
-#     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 57A5ACB6110576A6 && \
-#     apt-get update && apt-get install -y yarp
-
 # ROS noetic
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
     curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add - && \
@@ -83,28 +71,6 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool && \
     rosdep init && rosdep update
-
-#iCub software
-# RUN sh -c 'echo "deb http://www.icub.org/ubuntu `lsb_release -cs` contrib/science" > /etc/apt/sources.list.d/icub.list' && \
-#     apt update && \
-#     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 57A5ACB6110576A6 && \
-#     apt install -y icub
-
-#gazebo-yarp-plugin
-# RUN git clone https://github.com/robotology/gazebo-yarp-plugins.git && \
-#     cd gazebo-yarp-plugins && \
-#     mkdir build && \
-#     cd build && \
-#     cmake -DCMAKE_BUILD_TYPE=Release .. && \
-#     make
-
-#icub-models
-# RUN git clone https://github.com/robotology/icub-models.git && \
-#     cd icub-models && \
-#     mkdir build && \
-#     cd build && \
-#     cmake .. && \
-#     cmake --build . --target install
 
 WORKDIR /root
 
