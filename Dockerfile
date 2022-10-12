@@ -114,7 +114,8 @@ RUN pip install gym && \
     pip install -e . 
 
 RUN echo "export AMENT_PREFIX_PATH=${AMENT_PREFIX_PATH}:/usr/local/share/" >> .bashrc && \
-    echo "export GAZEBO_PLUGIN_PATH=${GAZEBO_PLUGIN_PATH}:/root/code-icub-gazebo-skin/gazebo_contactsensor_plugin/build" >> .bashrc
+    echo "export GAZEBO_PLUGIN_PATH=${GAZEBO_PLUGIN_PATH}:/root/code-icub-gazebo-skin/gazebo_contactsensor_plugin/build" >> .bashrc && \
+    echo "export GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:/root/code-icub-gazebo-skin/gazebo-models" >> .bashrc
 
 # Install informative git for bash
 RUN git clone https://github.com/magicmonty/bash-git-prompt.git /root/.bash-git-prompt --depth=1
