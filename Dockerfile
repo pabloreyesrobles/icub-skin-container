@@ -77,7 +77,11 @@ WORKDIR /root
 RUN pip install gym && \
     git clone https://gitlab.com/pablo_rr/code-icub-gazebo-skin.git && \
     cd code-icub-gazebo-skin/gym-icub-skin && \
-    pip install -e . 
+    pip install -e . && \
+    cd ../gazebo_contactsensor_plugin && \
+    mkdir build && \
+    cd build && \
+    cmake .. && make
 
 RUN echo "export AMENT_PREFIX_PATH=${AMENT_PREFIX_PATH}:/usr/local/share/" >> .bashrc && \
     echo "export GAZEBO_PLUGIN_PATH=${GAZEBO_PLUGIN_PATH}:/root/code-icub-gazebo-skin/gazebo_contactsensor_plugin/build" >> .bashrc && \
