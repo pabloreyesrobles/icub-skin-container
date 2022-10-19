@@ -74,6 +74,8 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
 
 WORKDIR /root
 
+COPY script.sh .
+
 RUN pip install gym && \
     git clone https://gitlab.com/pablo_rr/code-icub-gazebo-skin.git && \
     cd code-icub-gazebo-skin/gym-icub-skin && \
