@@ -11,7 +11,7 @@ interruptHandler () {
     kill $(jobs -p)
 }
 
-gazebo worlds/icub_skin.world &
+gazebo /root/code-icub-gazebo-skin/worlds/icub_skin.world &
 GAZEBO_PID=$!
 sleep 10
 
