@@ -23,7 +23,7 @@ RUN useradd -m $USERNAME && \
     groupmod --gid ${gid} $USERNAME
 
 RUN apt-get update && \
-    apt-get install -y apt-utils x11-apps sudo gnupg git wget curl build-essential
+    apt-get install -y apt-utils x11-apps sudo gnupg git wget curl build-essential htop
 
 # Python
 RUN apt install -y python3 python3-dev python3-pip python3-setuptools && \
@@ -76,7 +76,7 @@ WORKDIR /root
 
 COPY script.sh .
 
-RUN pip install gym && \
+RUN pip install gym explauto && \
     git clone https://gitlab.com/pablo_rr/code-icub-gazebo-skin.git && \
     cd code-icub-gazebo-skin/gym-icub-skin && \
     pip install -e . && \
@@ -99,5 +99,8 @@ RUN echo "alias code='code --user-data-dir=\"/root/.vscode\"'" >> /root/.bashrc 
     echo "source \${HOME}/.bash-git-prompt/gitprompt.sh" >> /root/.bashrc && \
     echo "YARP_COLORED_OUTPUT=1" >> /root/.bashrc && \
     echo "source ${ROBOTOLOGY_SUPERBUILD_INSTALL_DIR}/share/robotology-superbuild/setup.sh" >> /root/.bashrc
+
+# NEW INSTALLS. MOVE UPPER WHEN FINISH
+RUN apt-get update && apt-get install -y gedit
 
 SHELL ["/bin/bash", "-c"] 

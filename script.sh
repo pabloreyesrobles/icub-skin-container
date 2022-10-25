@@ -8,10 +8,11 @@ interruptHandler () {
     yarp disconnect /icubSim/skin/torso_comp /skinGui/torso:i
 
     kill $GAZEBO_PID
+    pkill -f gzserver
     kill $(jobs -p)
 }
 
-gazebo /root/code-icub-gazebo-skin/worlds/icub_skin.world &
+gazebo code-icub-gazebo-skin/worlds/icub_skin.world &
 GAZEBO_PID=$!
 sleep 10
 
