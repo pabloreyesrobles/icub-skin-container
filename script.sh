@@ -12,9 +12,9 @@ interruptHandler () {
     kill $(jobs -p)
 }
 
-gazebo code-icub-gazebo-skin/worlds/icub_skin.world &
+gzserver code-icub-gazebo-skin/worlds/icub_skin.world &
 GAZEBO_PID=$!
-sleep 10
+sleep 15
 
 iCubSkinGui --from left_arm.ini --useCalibration > /dev/null 2>&1 &
 iCubSkinGui --from left_forearm.ini --useCalibration > /dev/null 2>&1 &
