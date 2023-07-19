@@ -10,9 +10,9 @@ RUN echo 'America/Santiago' > /etc/timezone && \
     rm -rf /var/lib/apt/lists/*
 
 # Arguments picked from the command line!
-ARG user
-ARG uid
-ARG gid
+ARG user=icub
+ARG uid=1000
+ARG gid=1000
 
 #Add new user with our credentials
 ENV USERNAME ${user}
@@ -74,8 +74,6 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
 
 WORKDIR /root
 
-COPY script.sh .
-
 RUN pip install gym explauto && \
     git clone https://gitlab.com/pablo_rr/code-icub-gazebo-skin.git && \
     cd code-icub-gazebo-skin/gym-icub-skin && \
@@ -104,4 +102,14 @@ RUN echo "alias code='code --user-data-dir=\"/root/.vscode\"'" >> /root/.bashrc 
 # NEW INSTALLS. MOVE UPPER WHEN FINISH
 RUN apt-get update && apt-get install -y gedit nano
 
-SHELL ["/bin/bash", "-c"] 
+WORKDIR /root
+RUN git clone https://github.com/pabloreyesrobles/HebbianMetaLearning.git && \
+    cd HebbianMetaLearning && git checkout icub-skin && \
+    pip install -r requirements.txt
+
+WORKDIR /root
+COPY script.sh .
+RUN sed -i 's/\r//' script.sh
+
+#ENTRYPOINT ./script.sh && /bin/bash
+CMD [ "/bin/bash", "-c" ]
