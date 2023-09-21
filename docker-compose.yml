@@ -1,12 +1,17 @@
+version: '3'
+
 services:
   app:
-    image: icub-skin-container:latest
-    container_name: icub-skin
-    build: .
-    environment:
-      - DISPLAY=${DISPLAY}
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        user: ${USER}
+        uid:  ${UID}
+        gid:  ${GID}
     network_mode: host
     tty: true
     stdin_open: true
+    deploy:
+      mode: replicated
+      replicas: 6

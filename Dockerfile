@@ -9,19 +9,6 @@ RUN echo 'America/Santiago' > /etc/timezone && \
     apt-get install -q -y --no-install-recommends tzdata && \
     rm -rf /var/lib/apt/lists/*
 
-# Arguments picked from the command line!
-ARG user=icub
-ARG uid=1000
-ARG gid=1000
-
-#Add new user with our credentials
-ENV USERNAME ${user}
-RUN useradd -m $USERNAME && \
-    echo "$USERNAME:$USERNAME" | chpasswd && \
-    usermod --shell /bin/bash $USERNAME && \
-    usermod  --uid ${uid} $USERNAME && \
-    groupmod --gid ${gid} $USERNAME
-
 RUN apt-get update && \
     apt-get install -y apt-utils x11-apps sudo gnupg git wget curl build-essential htop
 
@@ -112,4 +99,4 @@ COPY script.sh .
 RUN sed -i 's/\r//' script.sh
 
 #ENTRYPOINT ./script.sh && /bin/bash
-CMD [ "/bin/bash", "-c" ]
+SHELL [ "/bin/bash", "-c" ]
