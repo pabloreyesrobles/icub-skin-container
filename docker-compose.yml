@@ -5,10 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        user: ${USER}
-        uid:  ${UID}
-        gid:  ${GID}
     network_mode: host
     tty: true
     stdin_open: true
