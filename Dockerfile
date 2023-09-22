@@ -98,5 +98,7 @@ WORKDIR /root
 COPY script.sh .
 RUN sed -i 's/\r//' script.sh
 
+RUN pip install h5py
+
 #ENTRYPOINT ./script.sh && /bin/bash
 SHELL [ "/bin/bash", "-c" ]
