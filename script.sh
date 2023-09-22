@@ -14,7 +14,7 @@ iKinCartesianSolver --context gazeboCartesianControl --part left_arm > /dev/null
 
 echo 'Training will start in 5 seconds'
 sleep 5
-python train_hebb.py --environment icub_skin-v0 --generations 100 --popsize 25 --threads 1 --sigma 0.15
+python ./HebbianMetaLearning/train_hebb.py --environment icub_skin-v0 --generations 100 --popsize 25 --threads 1 --sigma 0.15
 
 #iCubSkinGui --from left_arm.ini --useCalibration > /dev/null 2>&1 &
 #iCubSkinGui --from left_forearm.ini --useCalibration > /dev/null 2>&1 &
