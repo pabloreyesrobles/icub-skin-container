@@ -90,15 +90,16 @@ RUN echo "alias code='code --user-data-dir=\"/root/.vscode\"'" >> /root/.bashrc 
 RUN apt-get update && apt-get install -y gedit nano
 
 WORKDIR /root
-RUN git clone https://github.com/pabloreyesrobles/HebbianMetaLearning.git && \
-    cd HebbianMetaLearning && git checkout icub-skin && \
-    pip install -r requirements.txt
-
-WORKDIR /root
 COPY script.sh .
 RUN sed -i 's/\r//' script.sh
 
 RUN pip install h5py
+
+ARG ICUB_SKIN_VER=unknown
+WORKDIR /root
+RUN git clone https://github.com/pabloreyesrobles/HebbianMetaLearning.git && \
+    cd HebbianMetaLearning && git checkout icub-skin && \
+    pip install -r requirements.txt
 
 #ENTRYPOINT ./script.sh && /bin/bash
 SHELL [ "/bin/bash", "-c" ]
