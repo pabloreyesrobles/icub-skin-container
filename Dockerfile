@@ -97,8 +97,11 @@ RUN pip install h5py
 
 ARG ICUB_SKIN_VER=unknown
 WORKDIR /root
-RUN git clone https://github.com/pabloreyesrobles/HebbianMetaLearning.git && \
-    cd HebbianMetaLearning && git checkout icub-skin && \
+
+ADD https://api.github.com/repos/pabloreyesrobles/HebbianMetaLearning/git/refs/heads/icub-skin version.json
+RUN git clone -b icub-skin https://github.com/pabloreyesrobles/HebbianMetaLearning.git
+
+RUN cd HebbianMetaLearning && \
     pip install -r requirements.txt
 
 #ENTRYPOINT ./script.sh && /bin/bash
