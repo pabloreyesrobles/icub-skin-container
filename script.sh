@@ -15,7 +15,7 @@ sleep 10
 echo 'Training will start in 3 seconds'
 sleep 3
 cd HebbianMetaLearning
-python train_hebb.py --environment icub_skin-v0 --generations 100 --popsize 25 --threads 1 --sigma 0.15 &> ../train_hebb.log &
+python train_hebb.py --environment icub_skin-v0 --lr 0.25 --decay 0.98 --generations 100 --popsize 25 --threads 1 --sigma 0.15 &> ../train_hebb.log &
 
 #iCubSkinGui --from left_arm.ini --useCalibration > /dev/null 2>&1 &
 #iCubSkinGui --from left_forearm.ini --useCalibration > /dev/null 2>&1 &
