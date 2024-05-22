@@ -9,4 +9,4 @@ services:
     stdin_open: true
     deploy:
       mode: replicated
-      replicas: 10
+      replicas: 2
